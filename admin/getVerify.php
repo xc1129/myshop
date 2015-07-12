@@ -6,6 +6,6 @@
  * Time: 上午12:47
  */
 
-require_once '../lib/image.func.php';
+require_once '../include.php';
 
 verifyImage();
