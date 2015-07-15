@@ -1,6 +1,29 @@
 <?php 
 require_once '../include.php';
+/*
+$sql="select * from myshop_admin";
+$totalRows=getResultNum($sql);
+$pageSize=2;
+$totalPage=ceil($totalRows/$pageSize);
+$page=$_REQUEST['page']?(int)$_REQUEST['page']:1;
+if($page<1 || $page==null || !is_numeric($page))
+{
+    $page=1;
+}
+if($page>=$totalPage)
+{
+    $page=$totalPage;
+}
+$offset=($page-1)*$pageSize;
+$sql="select id,username,email from myshop_admin limit {$offset},{$pageSize}";
+$rows=fetchAll($sql);
+*/
+$sql="select * from myshop_admin";
+$totalRows=getResultNum($sql);
 $rows=getAllAdmin();
+$pageSize=2;
+$totalPage=ceil($totalRows/$pageSize);
+$rows=getAdminByPage($pageSize);
 if(!$rows)
 {
     alertMes("没有管理员，请添加","addAdmin.php");

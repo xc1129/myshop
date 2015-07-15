@@ -54,9 +54,30 @@ function addAdmin()
     return $mes;
 }
 
-function getAllAdmin()
+function getAllAdmin($where=null)
 {
-    $sql="select id,username,email from myshop_admin";
+    $sql="select id,username,email from myshop_admin {$where}";
+    $rows=fetchAll($sql);
+    return $rows;
+}
+
+function getAdminByPage($pageSize=2)
+{
+    $sql="select * from myshop_admin";
+    $totalRows=getResultNum($sql);
+    $pageSize=2;
+    $totalPage=ceil($totalRows/$pageSize);
+    $page=$_REQUEST['page']?(int)$_REQUEST['page']:1;
+    if($page<1 || $page==null || !is_numeric($page))
+    {
+        $page=1;
+    }
+    if($page>=$totalPage)
+    {
+        $page=$totalPage;
+    }
+    $offset=($page-1)*$pageSize;
+    $sql="select id,username,email from myshop_admin limit {$offset},{$pageSize}";
     $rows=fetchAll($sql);
     return $rows;
 }
