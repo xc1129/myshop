@@ -22,6 +22,7 @@ $sql="select * from myshop_admin";
 $totalRows=getResultNum($sql);
 $rows=getAllAdmin();
 $pageSize=2;
+$page=$_REQUEST['page']?(int)$_REQUEST['page']:1;
 $totalPage=ceil($totalRows/$pageSize);
 $rows=getAdminByPage($pageSize);
 if(!$rows)
